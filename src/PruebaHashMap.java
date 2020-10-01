@@ -1,8 +1,33 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.Calendar;
+
+interface Validacion{
+	Scanner input = new Scanner(System.in);
+	public static int validacionNatural() {
+		int ret = 0;
+		boolean err = false;
+		do {
+			try {
+				ret = input.nextInt();
+			} catch (java.util.InputMismatchException e) {
+				System.out.println("entrada no valida, intente de nuevo:");
+				input.nextLine();
+				err=true;
+			}
+			if (ret>0) {
+				err=false;
+			}else {
+				System.out.println("solo números naturales");
+				err=true;
+			}
+		}while(err);
+		return ret;
+	}
+}
 
 class Alumno{
 	private String nombre;
@@ -45,7 +70,7 @@ class Alumno{
 
 }
 
-class ColeccionAlumnos{
+class ColeccionAlumnos implements Validacion{
 	private Map<String, Alumno> mapAlumnos = new HashMap<String, Alumno>();
 
 	public ColeccionAlumnos(Map<String, Alumno> mapAlumnos) {
@@ -62,9 +87,16 @@ class ColeccionAlumnos{
 		this.mapAlumnos = mapAlumnos;
 	}
 	
-	public void llenarLista() {
+	public void llenarLista(int cantidad) {
+		for (int i = 0; i < cantidad; i++) {
+			System.out.println("edad:");
+			
+		}
 	}
 	public void vaciarLista() {
+		Map<String, Alumno> vacio = this.getMapAlumnos();
+		vacio.clear();
+		this.setMapAlumnos(vacio);
 	}
 	public void mostrarPorCarrera() {
 	}
@@ -75,7 +107,7 @@ class ColeccionAlumnos{
 	
 }
 
-public class PruebaHashMap {
+public class PruebaHashMap{
 
 	public static void main(String[] args) {
 		
