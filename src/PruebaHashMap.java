@@ -27,6 +27,21 @@ interface Validacion{
 		}while(err);
 		return ret;
 	}
+	public static String validacionCarrera() {
+		boolean err=false;
+		String carrera;
+		do {
+			System.out.println("carrera:");
+			carrera = input.nextLine().toLowerCase();
+			if(carrera.contains("isc")||carrera.contains("iia")||carrera.contains("im")||carrera.contains("la")||carrera.contains("cp")){
+				err=false;
+			}else {
+				System.out.println("no existe la carrera especificada");
+				err=true;
+			}
+		}while (err==true);
+		return carrera;
+	}
 }
 
 class Alumno{
@@ -71,6 +86,7 @@ class Alumno{
 }
 
 class ColeccionAlumnos implements Validacion{
+	Scanner input = new Scanner(System.in);
 	private Map<Integer, Alumno> mapAlumnos = new HashMap<Integer, Alumno>();
 
 	public ColeccionAlumnos(Map<Integer, Alumno> mapAlumnos) {
@@ -89,7 +105,11 @@ class ColeccionAlumnos implements Validacion{
 	
 	public void llenarLista(int cantidad) {
 		for (int i = 0; i < cantidad; i++) {
+			System.out.println("nombre:");
+			String nombre = input.nextLine();
 			System.out.println("edad:");
+			byte edad = (byte)Validacion.validacionNatural();
+			
 			
 		}
 	}
@@ -110,7 +130,8 @@ public class PruebaHashMap{
 
 	public static void main(String[] args) {
 		
-		
+		String carrera = Validacion.validacionCarrera();
+		System.out.println(carrera);
 		
 	}
 
