@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -39,8 +40,28 @@ interface Validacion{
 				System.out.println("no existe la carrera especificada");
 				err=true;
 			}
-		}while (err==true);
+		}while (err);
 		return carrera;
+	}
+	public static Calendar validacionFecha() {
+		int fch[]=new int[3];
+		boolean err=false;
+		do {
+			err=false;
+			System.out.println("fecha(dia/mes/año):");
+			String entry = input.nextLine();
+			try {
+				fch[0]=Integer.parseInt(entry.substring(0,2));
+				fch[1]=Integer.parseInt(entry.substring(3,5))-1;
+				fch[2]=Integer.parseInt(entry.substring(6,10));
+			} catch (Exception e) {
+				System.out.println("entrada no valida, intente de nuevo");
+				err=true;
+			}
+		}while(err);
+		Calendar fecha = Calendar.getInstance();
+		fecha.set(fch[2], fch[1], fch[0]);
+		return fecha;
 	}
 }
 
@@ -132,7 +153,8 @@ public class PruebaHashMap{
 		
 		String carrera = Validacion.validacionCarrera();
 		System.out.println(carrera);
-		
+		Calendar fechaActual = Validacion.validacionFecha();
+		System.out.println(fechaActual.getTime());
 	}
 
 }
