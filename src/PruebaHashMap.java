@@ -94,8 +94,7 @@ class ColeccionAlumnos implements Validacion{
 		}
 	}
 	public void vaciarLista() {
-		Map<String, Alumno> vacio = this.getMapAlumnos();
-		vacio.clear();
+		Map<String, Alumno> vacio=new HashMap<String, Alumno>();
 		this.setMapAlumnos(vacio);
 	}
 	public void mostrarPorCarrera() {
