@@ -71,19 +71,19 @@ class Alumno{
 }
 
 class ColeccionAlumnos implements Validacion{
-	private Map<String, Alumno> mapAlumnos = new HashMap<String, Alumno>();
+	private Map<Integer, Alumno> mapAlumnos = new HashMap<Integer, Alumno>();
 
-	public ColeccionAlumnos(Map<String, Alumno> mapAlumnos) {
+	public ColeccionAlumnos(Map<Integer, Alumno> mapAlumnos) {
 		super();
 		this.mapAlumnos = mapAlumnos;
 	}
 
 	
-	public Map<String, Alumno> getMapAlumnos() {
+	public Map<Integer, Alumno> getMapAlumnos() {
 		return mapAlumnos;
 	}
 
-	public void setMapAlumnos(Map<String, Alumno> mapAlumnos) {
+	public void setMapAlumnos(Map<Integer, Alumno> mapAlumnos) {
 		this.mapAlumnos = mapAlumnos;
 	}
 	
@@ -94,10 +94,10 @@ class ColeccionAlumnos implements Validacion{
 		}
 	}
 	public void vaciarLista() {
-		Map<String, Alumno> vacio=new HashMap<String, Alumno>();
+		Map<Integer, Alumno> vacio=new HashMap<Integer, Alumno>();
 		this.setMapAlumnos(vacio);
 	}
-	public void mostrarPorCarrera() {
+	public void mostrarPorCarrera(String carrera) {
 	}
 	public void calcularPromedioEdades() {
 	}
