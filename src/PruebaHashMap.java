@@ -42,9 +42,38 @@ class Alumno{
 	public void setFechaInscripcion(Calendar fechaInscripcion) {
 		this.fechaInscripcion = fechaInscripcion;
 	}
-	
+
 }
 
+class ColeccionAlumnos{
+	private Map<String, Alumno> mapAlumnos = new HashMap<String, Alumno>();
+
+	public ColeccionAlumnos(Map<String, Alumno> mapAlumnos) {
+		super();
+		this.mapAlumnos = mapAlumnos;
+	}
+
+	
+	public Map<String, Alumno> getMapAlumnos() {
+		return mapAlumnos;
+	}
+
+	public void setMapAlumnos(Map<String, Alumno> mapAlumnos) {
+		this.mapAlumnos = mapAlumnos;
+	}
+	
+	public void llenarLista() {
+	}
+	public void vaciarLista() {
+	}
+	public void mostrarPorCarrera() {
+	}
+	public void calcularPromedioEdades() {
+	}
+	public void filtroFecha(Calendar fecha) {
+	}
+	
+}
 
 public class PruebaHashMap {
 
