@@ -58,7 +58,7 @@ interface Validacion{
 		boolean err=false;
 		do {
 			err=false;
-			System.out.println("fecha(dia/mes/año):");
+			System.out.println("fecha(dd/mm/aaaa):");
 			String entry = input.nextLine();
 			try {
 				fch[0]=Integer.parseInt(entry.substring(0,2));
@@ -167,6 +167,7 @@ class ColeccionAlumnos implements Validacion{
 	public void vaciarLista() {
 		Map<Integer, Alumno> vacio=new HashMap<Integer, Alumno>();
 		this.setMapAlumnos(vacio);
+		System.out.println("lista vaciada con exito");
 	}
 	public void mostrarPorCarrera(String carrera) {
 		System.out.println("filtro por carrera: "+carrera);
@@ -189,6 +190,18 @@ class ColeccionAlumnos implements Validacion{
 		return promedio;
 	}
 	public void filtroFecha(Calendar fecha) {
+		System.out.println("filtro fecha:");
+		Map<Integer, Alumno> mapAlumnos = this.getMapAlumnos();
+		for(int i=0;i<mapAlumnos.size();i++) {
+			Alumno at = mapAlumnos.get(i);
+			int af = at.getFechaInscripcion().compareTo(fecha);
+			
+			if (af==1) {
+				System.out.println(at);
+			}
+			
+		}
+		
 	}
 	
 }
@@ -201,13 +214,22 @@ public class PruebaHashMap{
 		//System.out.println(carrera);
 		//Calendar fechaActual = Validacion.validacionFecha();
 		//System.out.println(fechaActual.getTime());
-		//ColeccionAlumnos ca = new ColeccionAlumnos();
-		//ca.llenarLista(2);
+		ColeccionAlumnos ca = new ColeccionAlumnos();
+		ca.vaciarLista();
+		ca.llenarLista(2);
 		//ca.mostrarPorCarrera("isc");
 		//System.out.println("promedio: "+ca.calcularPromedioEdades());
 		
-		int val = Validacion.validacionFecha().compareTo(Validacion.validacionFecha());
-		System.out.println(val);
+		//int val = Validacion.validacionFecha().compareTo(Validacion.validacionFecha());
+		//System.out.println(val);
+		Calendar fecha = Calendar.getInstance();
+		fecha.set(2016, 7, 10);
+		ca.filtroFecha(fecha);
+		ca.vaciarLista();
+		System.out.println("xd");
+		ca.filtroFecha(fecha);
+		ca.llenarLista(1);
+		ca.filtroFecha(fecha);
 	}
 
 }
