@@ -28,16 +28,26 @@ interface Validacion{
 		}while(err);
 		return ret;
 	}
+	public static byte validacionNaturalb() {
+		return (byte)validacionNatural();
+	}
 	public static String validacionCarrera() {
 		boolean err=false;
 		String carrera;
+		int i=0;
 		do {
-			System.out.println("carrera:");
+			if(i==0) {
+				System.out.println("carrera:");
+			}
+			i++;
 			carrera = input.nextLine().toLowerCase();
 			if(carrera.contains("isc")||carrera.contains("iia")||carrera.contains("im")||carrera.contains("la")||carrera.contains("cp")){
 				err=false;
+				
 			}else {
-				System.out.println("no existe la carrera especificada");
+				if(i!=1) {
+					System.out.println("no existe la carrera especificada, ingrese la carrera de nuevo");
+				}
 				err=true;
 			}
 		}while (err);
@@ -104,6 +114,13 @@ class Alumno{
 		this.fechaInscripcion = fechaInscripcion;
 	}
 
+	@Override
+	public String toString() {
+		return "Alumno [nombre=" + nombre + ", edad=" + edad + ", carrera=" + carrera + ", fechaInscripcion="
+				+ fechaInscripcion.get(Calendar.DATE)+"/"+fechaInscripcion.get(Calendar.MONTH)+"/"+fechaInscripcion.get(Calendar.YEAR)+ "]";
+	}
+
+	
 }
 
 class ColeccionAlumnos implements Validacion{
@@ -114,8 +131,11 @@ class ColeccionAlumnos implements Validacion{
 		super();
 		this.mapAlumnos = mapAlumnos;
 	}
+	public ColeccionAlumnos() {
+	}
 
-	
+
+
 	public Map<Integer, Alumno> getMapAlumnos() {
 		return mapAlumnos;
 	}
@@ -125,13 +145,19 @@ class ColeccionAlumnos implements Validacion{
 	}
 	
 	public void llenarLista(int cantidad) {
+		Map<Integer, Alumno> mapAlumnos = new HashMap<Integer, Alumno>();
+		
 		for (int i = 0; i < cantidad; i++) {
 			System.out.println("nombre:");
 			String nombre = input.nextLine();
 			System.out.println("edad:");
-			byte edad = (byte)Validacion.validacionNatural();
-			
-			
+			byte edad;
+			edad = Validacion.validacionNaturalb();
+			String carrera = Validacion.validacionCarrera();
+			Calendar fechaInscripcion = Validacion.validacionFecha();
+			Alumno a = new Alumno(nombre, edad, carrera, fechaInscripcion);
+			System.out.println(a);
+			mapAlumnos.put(i,a);
 		}
 	}
 	public void vaciarLista() {
@@ -139,6 +165,7 @@ class ColeccionAlumnos implements Validacion{
 		this.setMapAlumnos(vacio);
 	}
 	public void mostrarPorCarrera(String carrera) {
+	
 	}
 	public void calcularPromedioEdades() {
 	}
@@ -151,10 +178,12 @@ public class PruebaHashMap{
 
 	public static void main(String[] args) {
 		
-		String carrera = Validacion.validacionCarrera();
-		System.out.println(carrera);
-		Calendar fechaActual = Validacion.validacionFecha();
-		System.out.println(fechaActual.getTime());
+		//String carrera = Validacion.validacionCarrera();
+		//System.out.println(carrera);
+		//Calendar fechaActual = Validacion.validacionFecha();
+		//System.out.println(fechaActual.getTime());
+		ColeccionAlumnos ca = new ColeccionAlumnos();
+		ca.llenarLista(3);
 	}
 
 }
