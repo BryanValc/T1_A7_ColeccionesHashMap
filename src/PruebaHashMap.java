@@ -117,7 +117,7 @@ class Alumno{
 	@Override
 	public String toString() {
 		return "Alumno [nombre=" + nombre + ", edad=" + edad + ", carrera=" + carrera + ", fechaInscripcion="
-				+ fechaInscripcion.get(Calendar.DATE)+"/"+fechaInscripcion.get(Calendar.MONTH)+"/"+fechaInscripcion.get(Calendar.YEAR)+ "]";
+				+ fechaInscripcion.get(Calendar.DATE)+"/"+(fechaInscripcion.get(Calendar.MONTH)+1)+"/"+fechaInscripcion.get(Calendar.YEAR)+ "]";
 	}
 
 	
@@ -148,6 +148,7 @@ class ColeccionAlumnos implements Validacion{
 		Map<Integer, Alumno> mapAlumnos = new HashMap<Integer, Alumno>();
 		
 		for (int i = 0; i < cantidad; i++) {
+			System.out.println("Alumno "+(i+1));
 			System.out.println("nombre:");
 			String nombre = input.nextLine();
 			System.out.println("edad:");
@@ -159,15 +160,33 @@ class ColeccionAlumnos implements Validacion{
 			System.out.println(a);
 			mapAlumnos.put(i,a);
 		}
+		
+		this.setMapAlumnos(mapAlumnos);
+		
 	}
 	public void vaciarLista() {
 		Map<Integer, Alumno> vacio=new HashMap<Integer, Alumno>();
 		this.setMapAlumnos(vacio);
 	}
 	public void mostrarPorCarrera(String carrera) {
-	
+		System.out.println("filtro por carrera: "+carrera);
+		Map<Integer, Alumno> mapAlumnos = this.getMapAlumnos();
+		for(int i=0;i<mapAlumnos.size();i++) {
+			Alumno at = mapAlumnos.get(i);
+			if (at.getCarrera().contains(carrera)) {
+				System.out.println(at);
+			}
+		}
 	}
-	public void calcularPromedioEdades() {
+	public double calcularPromedioEdades() {
+		Map<Integer, Alumno> mapAlumnos = this.getMapAlumnos();
+		double promedio=0;
+		for(int i=0;i<mapAlumnos.size();i++) {
+			Alumno at = mapAlumnos.get(i);
+			promedio = promedio +at.getEdad();
+		}
+		promedio = promedio/mapAlumnos.size();
+		return promedio;
 	}
 	public void filtroFecha(Calendar fecha) {
 	}
@@ -182,8 +201,13 @@ public class PruebaHashMap{
 		//System.out.println(carrera);
 		//Calendar fechaActual = Validacion.validacionFecha();
 		//System.out.println(fechaActual.getTime());
-		ColeccionAlumnos ca = new ColeccionAlumnos();
-		ca.llenarLista(3);
+		//ColeccionAlumnos ca = new ColeccionAlumnos();
+		//ca.llenarLista(2);
+		//ca.mostrarPorCarrera("isc");
+		//System.out.println("promedio: "+ca.calcularPromedioEdades());
+		
+		int val = Validacion.validacionFecha().compareTo(Validacion.validacionFecha());
+		System.out.println(val);
 	}
 
 }
