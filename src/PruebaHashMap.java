@@ -210,26 +210,79 @@ public class PruebaHashMap{
 
 	public static void main(String[] args) {
 		
-		//String carrera = Validacion.validacionCarrera();
-		//System.out.println(carrera);
-		//Calendar fechaActual = Validacion.validacionFecha();
-		//System.out.println(fechaActual.getTime());
-		ColeccionAlumnos ca = new ColeccionAlumnos();
-		ca.vaciarLista();
-		ca.llenarLista(2);
-		//ca.mostrarPorCarrera("isc");
-		//System.out.println("promedio: "+ca.calcularPromedioEdades());
 		
-		//int val = Validacion.validacionFecha().compareTo(Validacion.validacionFecha());
-		//System.out.println(val);
+		ColeccionAlumnos ca = new ColeccionAlumnos();
+		
 		Calendar fecha = Calendar.getInstance();
 		fecha.set(2016, 7, 10);
-		ca.filtroFecha(fecha);
+		
+		ca.llenarLista(5);
 		ca.vaciarLista();
-		System.out.println("xd");
-		ca.filtroFecha(fecha);
-		ca.llenarLista(1);
-		ca.filtroFecha(fecha);
+		byte opc = 0;
+		byte opc2 = 0;
+		
+		do {
+			System.out.println(" 1) Llenar lista"
+					+ "\n 2) Vaciar lista"
+					+ "\n 3) Mostrar los alumnos por carrera"
+					+ "\n 4) Calcular Promedio de edades"
+					+ "\n 5) Mostrar los alumnos que se inscribieron después de la fecha indicada(10/08/2016)"
+					+ "\n 6)Salir");
+			opc = Validacion.validacionNaturalb();
+			switch (opc) {
+			case 1:
+				System.out.println("cantidad de alumnos: ");
+				int cantidad = Validacion.validacionNatural();
+				ca.llenarLista(cantidad);
+				break;
+			case 2:
+				ca.vaciarLista();
+				break;
+			case 3:
+				String carrera="";
+				do {
+				System.out.println(" 1) ISC"
+						+ "\n 2) IIA"
+						+ "\n 3) IM"
+						+ "\n 4) LA"
+						+ "\n 5) CP");
+				opc2 = Validacion.validacionNaturalb();
+				switch (opc2) {
+				case 1:
+					carrera="isc";opc2=6;break;
+				case 2:
+					carrera="iia";opc2=6;break;
+				case 3:
+					carrera="im";opc2=6;break;
+				case 4:
+					carrera="la";opc2=6;break;
+				case 5:
+					carrera="cp";opc2=6;break;
+				default:
+					System.out.println("entrada no válida");
+					opc2=7;
+					break;
+					}
+				}while(opc2!=6);
+				ca.mostrarPorCarrera(carrera);
+				break;
+			case 4:
+				System.out.println("promedio de edades: "+ca.calcularPromedioEdades());
+				break;
+			case 5:
+				ca.filtroFecha(fecha);
+				break;
+			case 6:
+				break;
+			default:
+				System.out.println("entrada no válida");
+				break;
+			}
+			
+		}while(opc!=6);
+		
+		System.out.println("fin de ejecución");
+		
 	}
 
 }
